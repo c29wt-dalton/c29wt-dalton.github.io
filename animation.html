@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+
+	<style type="text/css">
+		
+		#basketball{
+	width:100px;
+	height:100px;
+	background-color:orangered;
+	border-radius:50%;
+
+	position: relative;
+	top: 1000px;
+
+	animation-name: dribble;
+	animation-duration: 10s;
+	animation-iteration-count: 5;
+
+		}
+
+		@keyframes dribble{
+			0%{
+				top:500px;
+				left:0px;
+			}
+			10%{
+				top:100px;
+				left:100px;
+			}
+			20%{
+				top:500px;
+				left:200px;
+			}
+			30%{
+				top:100px;
+				left:300px;
+			}
+			40%{
+				top:500px;
+				left:400px;
+			}
+			50%{
+				top:100px;
+				left:500px;
+			}
+			
+			60%{
+				top:500px;
+				left:600px;
+			}
+			70%{
+				top:100px;
+				left:700px;
+			}
+			80%{
+				top:500px;
+				left:800px;
+			}
+			90%{
+				top:100px;
+				left:900px;
+			}
+			100%{
+				top:500px;
+				left:1000px;
+			}
+
+		}
+
+	</style>
+
+</head>
+<body>
+
+	<div id="basketball"> </div>
+</body>
+</html>
