@@ -1,0 +1,56 @@
+ideas
+- an emoji that follows your mouse
+
+step 1 - make a div?
+step 2 - style the div
+aka connect to emoji's
+step 3 - connect it to cursor using event listener
+- match x and y of mouse with div left and right 
+(x, y) (left,top)
+
+journal 11/13 - created a changing emoji that follows my mouse. i learned about inner text HTML and that an emoji is not a background image but Text! also i learend that x and y matches with left and top in css/text
+
+<<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		#emoji{
+		font-size: 200px;
+		position: absolute;
+	}
+	</style>
+
+	<title></title>
+</head>
+<body>
+
+
+<div id="emoji">
+😆 
+</div>
+
+
+	<script type="text/javascript">
+		
+			document.addEventListener("mousemove",function(event){
+				console.log(event)
+				emoji.style.left=event.clientX-100 + "px"
+				emoji.style.top=event.clientY-100+"px"
+			})
+
+			emoji.addEventListener("click", function(event){
+				console.log('hei')
+				emoji.innerHTML="😏"
+
+			emoji.addEventListener("click",function(event){
+				console.log('hei')
+				emoji.innherHTML="😲"
+			})
+			})
+	</script>
+
+
+
+</body>
+</html>
+

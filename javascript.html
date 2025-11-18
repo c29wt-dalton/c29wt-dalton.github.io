@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<body>
+
+		<style type="text/css">
+				#banana{
+				width: 100px;
+				height: 100px;
+				position:absolute;
+				background-image: url(dancing-banana.gif);
+				background-size:contain;
+				background-repeat: no-repeat;
+
+				}
+		</style>
+</head>
+
+
+</body>
+
+<div id="banana"></div>
+	
+<script type="text/javascript">
+
+	banana.style.left="0px"
+
+	document.addEventListener("keypress",function(){
+		console.log("what up I am banana aka apple")
+
+		banana.style.left = parseInt(banana.style.left) + 5 + "px";
+	})
+</script>
+	
+</html>
