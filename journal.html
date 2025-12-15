@@ -30,19 +30,19 @@
   font-style: normal;
 
   }	
-	 table, th, td {
+	 td{
     border: 1px solid black;
     border-collapse: collapse;
-  }
-  th, td {
     padding: 8px;
     text-align: left;
   }
-table tr:nth-child(odd) {  background-color: #e8e9eb; /* Slightly grey color */
+
+
+  .grey{  background-color: #e8e9eb; /* Slightly grey color */
 
 }
 
-table tr:nth-child(even) {  background-color: #fbfcf8; /* Cream color */
+.white {  background-color: #fbfcf8; /* Cream color */
 
 }
 
@@ -56,25 +56,31 @@ table tr:nth-child(even) {  background-color: #fbfcf8; /* Cream color */
 
   <table>
     <!-- Optional: Table Header Row -->
-    <thead>
-      <tr>
-        <th></th>
-        <th>White</th>
-        <th>Black</th>
+ 
+      <tr class="grey">
+        <td></td>
+        <td>Things Learned</td>
+        <td>To Work On</td>
       </tr>
-</thead>
-    <tbody>
-      <tr>
+
+
+      <tr class="white">
         <td>11/6/25</td>
-        <td>Row 1</td>
-        <td>Row 1</td>
+        <td>ENTRY 1</td>
+        <td>ENTRY 2 1</td>
       </tr>
-      <tr>
+
+
+
+      <tr class="grey">
         <td>Row 2</td>
-        <td class="data-cell"> I did this it was good</td>
-        <td class="data-cell"> I did this it was bad</td>
+        <td> I did this it was good</td>
+        <td> I did this it was bad</td>
       </tr>
-      <tr>
+
+
+
+      <tr class="white">
         <td>Row 3</td>
         <td>Row 3</td>
         <td>Row 3</td>

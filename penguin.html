@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+
+<style>
+	.penguin{
+		width:100px;
+		height:100px;
+		background-image:url(penguin.gif);
+		background-size: contain;
+		background-repeat: no-repeat;
+		display:inline-block;
+	}
+</style>
+
+</head>
+<body>
+
+
+	<script type="text/javascript">
+		
+		function makePenguin (){
+	let penguin=document.createElement("div")
+	penguin.classList.add("penguin")
+	document.body.appendChild(penguin)
+
+		}
+
+		document.addEventListener("keypress",makePenguin)
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+
+	<style type="text/css">
+
+	#cookie{
+		width:400px;
+		height:550px;
+		background-image: url(cookie.png);
+		background-position: center;
+		background-repeat: no-repeat;
+
+	}
+
+	body{
+		background-color:lightblue;
+		margin:0px;
+
+	}
+
+	#text{
+		width:50px;
+		height:20px;
+		border:1px solid black;
+		font-size:40px;
+	}
+
+</style>
+</head>
+<body>
+<center>
+
+	Click my cookiee to get a high score
+	<div id="text"></div>
+
+	<div id="cookie"></div>
+</center>
+
+	<script type="text/javascript">
+
+		let score=0
+
+		cookie.addEventListener("click", function(){
+			score=score+1
+			console.log(score)
+			text.innerText=score
+
+			if(score==3){
+				alert("ha u thought")
+			}
+
+			if(score==4){
+				alert("nahh u can do better")
+			}
+		})
+		
+
+	</script>
+
+
+
+</body>
+</html>
