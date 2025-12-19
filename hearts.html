@@ -7,11 +7,11 @@
 </head>
 
 <style type="text/css">
-	.o{
+	.heart{
 		width:100px;
 		height:100px;
 		display:incline-block;
-		background-image:url();
+		background-image:url(heart.png);
 		background-size:contain;
 		background-repeat: no-repeat;
 
@@ -26,11 +26,12 @@
 	function makeheart(){
 let heart = document.createElemnt("div")
 document.body.appendChild(heart)
-heart.classList.add("o")
+heart.classList.add("heart")
 heart.style.transform="rotate("+Math.random()
-*360+"deg")""
+*360+"deg)"
 	}
 
+makeHeart();
 
 
 
