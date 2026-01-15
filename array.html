@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+
+	<style type=text/css>
+		#title{
+			font-size: 100px;
+		}
+
+
+	</style>
+	
+</head>
+<body>
+
+<center>
+	<div id="title"> What should I eat for dinner tonight </div>
+	 </center>
+
+	<script type="text/javascript">
+		
+		let food = ["chicken tikka masala with naan", "beef with tomatoes", "chicken and broccoli", "cheeseburger and fries", "cesaer salad","sweetgreen salad", "pasta bolognese", "spaghetti and meatballs", "lasanga", "ham and cheese sandwhich", "dimsum","signapore mei fun", "tonkotsu ramen","pork gyoza", "fish and chips", "jerk chicken","sushi","chipotle","chick-fil-a", "couscous", "steak", "lamb","korean bbq","spicy mapo tofu","udon","pho", "bahn mi"]
+
+
+		document.addEventListener("click",function(){
+
+			let randomNumber = Math.round(Math.random()*26)
+			console.log(randomNumber)
+			alert(food[randomNumber])
+		})
+	</script>
+	
+</body>
+</html>
