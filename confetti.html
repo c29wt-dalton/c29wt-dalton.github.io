@@ -1,55 +1,81 @@
 <html>
 <head>
 <style type="text/css">
-
-
 		.confetti{
 		width: 10px;
 		height: 20px;
+		border: 1px solid black;
 		position: absolute;
-		transition: 2s;
-		/*transform: rotate(45deg);*/
+		animation-name:swing3d;	
+		animation-duration:1s;	
+		animation-iteration-count: infinite;
+		animation-direction: alternate;
 		}
 
-		body{
-			background-color:lightpink;
-
+		@keyframes swing{
+			from {
+				transform: rotate(var(--startRot));
+				/*transform: rotate(-45deg);*/
+			}
+			to {
+				transform: rotate(var(--endRot));
+				/*transform: rotate(45deg);*/
+			}
 		}
+		@keyframes swing3d {
+			from {
+				transform: rotateY(-180deg);
+			}
+			to {
+				transform: rotateY(180deg);
+			}
+		} 
+
+	
 
 </style>
 
 </head>
 <body>
 
-		<script type="text/javascript">
-		let falling =100
-		function makeConfetti(){
+		<script>
+			function makeConfetti(){
 		let square= document.createElement(
 		"div")
-square.classList.add("confetti")
+		square.classList.add("confetti")
 		document.body.appendChild(square)
 
-			let r=Math.round(Math.random()*255)
-			let g=Math.round(Math.random()*255)
-			let b=Math.round(Math.random()*255)
+			let r =Math.round(Math.random()*255)
+			let g =Math.round(Math.random()*255)
+			let b =Math.round(Math.random()*255)
 			let rotation = Math.random()*360
+
+			let startRot = Math.random()*-60 + "deg"
+			let endRot = Math.random()* 60 +"deg"
 
 square.style.backgroundColor="rgb("+r+","+g+","+b+")"
 
-square.style.left=Math.random()*2000+"px"
+square.style.left=Math.random()*1500+"px"
 square.style.top=Math.random()*1000+"px"
-square.style.width = Math.random() *50 + "px"
-square.style.height = Math.random() *25 + "px"
+// square.style.width = Math.random() *50 + "px"
+// square.style.height = Math.random() *25 + "px"
 square.style.transform = "rotate(" +rotation +"deg)"
 
+square.style.setProperty("--startRot", startRot)
+square.style.setProperty("--endRot", endRot)
+
 function fall(){
-falling=falling+10
-square.style.top=parseInt(square.style.top)+falling+"px"
+let fallFactor = 10
+square.style.top=parseInt(square.style.top)+fallFactor+"px"
+console.log(square.style.top)
+if(parseInt(square.style.top)>1000){
+	square.style.top = "10px"
+	}
 }
 setInterval(fall, 100)
 }
 
-setInterval(makeConfetti, 20)
+setInterval(makeConfetti, 300)
 </script>
 
 </body>
