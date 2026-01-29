@@ -24,10 +24,12 @@
 		}
 		@keyframes swing3d {
 			from {
-				transform: rotateY(-180deg);
+				/*transform: rotateY(-180deg);*/
+				transform: rotateY(var(--startRot3d));
 			}
 			to {
-				transform: rotateY(180deg);
+				/*transform: rotateY(180deg);*/
+				transform: rotateY(var(--endRot3d));
 			}
 		} 
 
@@ -39,6 +41,10 @@
 <body>
 
 		<script>
+			let my_students = ["augy","chae","faiz"]
+			let colors = ["#D10000","#3E000C", "#7C0B2B"]
+			// console.log(my_students.length)
+
 			function makeConfetti(){
 		let square= document.createElement(
 		"div")
@@ -53,7 +59,13 @@
 			let startRot = Math.random()*-60 + "deg"
 			let endRot = Math.random()* 60 +"deg"
 
-square.style.backgroundColor="rgb("+r+","+g+","+b+")"
+			let startRot3d = Math.random()*-60 +"deg"
+			let startRot3d = Math.random()*-60 + "deg"
+
+			let randomColorIndex = Math.floor(Math.random()*colors.length)
+			console.log(randomColorIndex)
+			square.style.backgroundColor = colors[randomColorIndex]
+// square.style.backgroundColor="rgb("+r+","+g+","+b+")"
 
 square.style.left=Math.random()*1500+"px"
 square.style.top=Math.random()*1000+"px"
@@ -67,15 +79,18 @@ square.style.setProperty("--endRot", endRot)
 function fall(){
 let fallFactor = 10
 square.style.top=parseInt(square.style.top)+fallFactor+"px"
-console.log(square.style.top)
+// console.log(square.style.top)
 if(parseInt(square.style.top)>1000){
 	square.style.top = "10px"
 	}
 }
 setInterval(fall, 100)
 }
+for (let i = 0; i<=100; i++){
+	makeConfetti()
+}
 
-setInterval(makeConfetti, 300)
+// setInterval(makeConfetti, 300)
 </script>
 
 </body>
