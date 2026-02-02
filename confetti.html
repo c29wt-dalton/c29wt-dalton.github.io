@@ -39,13 +39,17 @@
 
 </head>
 <body>
-
+	<button id="btn"> drop confetti</button>
+	<input type="color" value="#FFD6E0" id="colorPicker">
 		<script>
-			let my_students = ["augy","chae","faiz"]
-			let colors = ["#D10000","#3E000C", "#7C0B2B"]
-			// console.log(my_students.length)
+			let colors = ["#36b8f5","#b653fc", "#fa3e4e"]
 
+			let dropConfettiBtn = document.getElementById ("btn")
+
+			let colorPicker = document.getElementById ("colorPicker")
+			console.log(colorPicker.value)
 			function makeConfetti(){
+
 		let square= document.createElement(
 		"div")
 		square.classList.add("confetti")
@@ -60,11 +64,13 @@
 			let endRot = Math.random()* 60 +"deg"
 
 			let startRot3d = Math.random()*-60 +"deg"
-			let startRot3d = Math.random()*-60 + "deg"
+			let endRot3d = Math.random()*-60 + "deg"
 
-			let randomColorIndex = Math.floor(Math.random()*colors.length)
-			console.log(randomColorIndex)
-			square.style.backgroundColor = colors[randomColorIndex]
+			// let randomColorIndex = Math.floor(Math.random()*colors.length)
+			// console.log(randomColorIndex)
+
+			square.style.backgroundColor = colorPicker.value
+			// square.style.backgroundColor = colors[randomColorIndex]
 // square.style.backgroundColor="rgb("+r+","+g+","+b+")"
 
 square.style.left=Math.random()*1500+"px"
@@ -86,10 +92,15 @@ if(parseInt(square.style.top)>1000){
 }
 setInterval(fall, 100)
 }
-for (let i = 0; i<=100; i++){
-	makeConfetti()
-}
-
+// for (let i = 0; i<=100; i++){
+// 	makeConfetti()
+// }
+	dropConfettiBtn.addEventListener("click", function() {
+		for (let i = 0; i<10; i++){
+			makeConfetti()
+		}
+	})
+	
 // setInterval(makeConfetti, 300)
 </script>
 
