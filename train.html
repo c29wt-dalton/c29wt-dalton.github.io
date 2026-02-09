@@ -56,22 +56,39 @@
 	<button id="subtract-person"> subtract person</button>
 
 	<div id="train"> 
-			<div class="cart">faiz</div>
-			<div class="cart">lily</div>
-			<div class="cart">august</div>
+			
 	 </div>
 
 	<script>
 		
-		let people = ["faiz","lily", "annika"]
+		let people = ["faiz","lily"]
+		let train = document.getElementById("train")
 		
+		
+
+		function makeTrain(){
+			train.innerHTML = ""
+			for(var i=0; i < people.length; i++){
+				console.log(people[i])
+			let cart= document.createElement("div")
+			cart.textContent = people[i]
+			cart.classList.add("cart")
+			train.appendChild(cart)
+			}
+		}
+
+		makeTrain()
+
+
 		let addPersonBtn = document.getElementById("add-person")
 		addPersonBtn.addEventListener("click",function(){
 			let personInput = document.getElementById("person")
 
-			people.push("personInput.value")
-
+			people.push(personInput.value)
+			makeTrain()
+			personInput.value = ""
 			console.log(people)
+
 		})
 
 		let subtractPersonBtn = document.getElementById("subtract-person")
@@ -79,7 +96,7 @@
 			let personInput = document.getElementById("person")
 
 			people.pop()
-
+			makeTrain()
 			console.log(people)
 		})
 	</script>
