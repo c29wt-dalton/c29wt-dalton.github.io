@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+
+</head>
+<body>
+
+	<script>
+			let xpos
+			let ypos
+			let xspeed = 5
+			let yspeed = 8
+			let d =50
+			let fillColor = "blue"
+		function setup(){
+			createCanvas(800,800)
+			xpos = width/2
+			ypos = height/2
+		}
+
+		function draw(){
+			background(200)
+			// if xpos > width or xpos is less than 0
+			if (xpos + d/2 > width|| xpos - d/2 <0){
+				//reverse
+				xspeed *= -1
+			}
+			if (ypos + d/2>height || ypos - d/2 <0){
+				yspeed *=-1
+			}
+
+
+			if (xpos > width/2 && ypos < height/2){
+				fillColor = "green"
+			} else if (xpos < width/2 && ypos > height/2){
+				fillColor = "purple"
+			} else if (xpos < width/2 && ypos < height/2) {
+				fillColor = "yellow"
+			} else {
+				fillColor = "blue"
+			}
+
+			xpos += xspeed
+			ypos += yspeed
+			fill(fillColor)
+			circle(xpos, ypos,d)
+
+		}
+	</script>
+
+
+</body>
+</html>
