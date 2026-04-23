@@ -24,6 +24,7 @@
 
 		function draw(){
 			background(200)
+			d = getRandomDiameter()
 			// if xpos > width or xpos is less than 0
 			if (xpos + d/2 > width|| xpos - d/2 <0){
 				//reverse
@@ -34,21 +35,35 @@
 			}
 
 
-			if (xpos > width/2 && ypos < height/2){
-				fillColor = "green"
-			} else if (xpos < width/2 && ypos > height/2){
-				fillColor = "purple"
-			} else if (xpos < width/2 && ypos < height/2) {
-				fillColor = "yellow"
-			} else {
-				fillColor = "blue"
-			}
+			changeBallcolor("green","purple","yellow", "blue")
 
 			xpos += xspeed
 			ypos += yspeed
 			fill(fillColor)
 			circle(xpos, ypos,d)
 
+		}
+
+		function getRandomDiameter (){
+			let randomDiameter = random(30,50)
+			return randomDiameter
+		}
+
+
+
+		function changeBallcolor(topRightColor, bottomRightColor, topLeftColor, bottomLeftColor){
+			if (xpos > width/2 && ypos < height/2){
+				fillColor = topRightColor
+
+			} else if (xpos < width/2 && ypos > height/2){
+				fillColor = bottomRightColor
+
+			} else if (xpos < width/2 && ypos < height/2){
+				fillColor = topLeftColor
+
+			} else {
+				fillColor = bottomLeftColor
+			}
 		}
 	</script>
 
