@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Flag Guesser</title>
+
+ <style>
+ body {
+ margin: 0;
+ background: #f0f0f0;
+ font-family: Arial, sans-serif;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ padding: 20px;
+ }
+
+ #info {
+ font-size: 18px;
+ margin-bottom: 10px;
+ text-align: center;
+ }
+
+ button {
+ margin: 5px;
+ padding: 10px 15px;
+ font-size: 16px;
+ cursor: pointer;
+ }
+
+ #flag-container {
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: center;
+ gap: 15px;
+ margin-top: 20px;
+ }
+
+ .flag {
+ width: 150px;
+ height: 100px;
+ cursor: pointer;
+ border: 2px solid transparent;
+ transition: 0.2s;
+ position: relative;
+ display: flex;
+ overflow: hidden;
+ }
+
+ .flag:hover {
+ transform: scale(1.05);
+ border-color: black;
+ }
+
+ .horizontal {
+ flex-direction: column;
+ }
+
+ .horizontal div {
+ flex: 1;
+ }
+
+ .vertical {
+ flex-direction: row;
+ }
+
+ .vertical div {
+ flex: 1;
+ }
+
+ .red {
+ background: #CE1126;
+ }
+
+ .darkred {
+ background: #A80000;
+ }
+
+ .hred {
+ background: #CE2939;
+ }
+
+ .white {
+ background: #FFFFFF;
+ }
+
+ .blue {
+ background: #0033A0;
+ }
+
+ .black {
+ background: #000000;
+ }
+
+ .yellow {
+ background: #FCD116;
+ }
+
+ .green {
+ background: #009B3A;
+ }
+
+ .hgreen {
+ background: #477050;
+ }
+
+ .orange {
+ background: #FF9933;
+ }
+
+ .lightblue {
+ background: #00A1DE;
+ }
+
+ #japan {
+ background: white;
+ justify-content: center;
+ align-items: center;
+ }
+
+ #japan::after {
+ content: "";
+ width: 45px;
+ height: 45px;
+ background: #BC002D;
+ border-radius: 50%;
+ }
+
+ #brazil {
+ background: #009C3B;
+ justify-content: center;
+ align-items: center;
+ position: relative;
+ }
+
+ #brazil::before {
+ content: "";
+ width: 120px;
+ height: 80px;
+ background: #FEDF00;
+ clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+ position: absolute;
+ }
+
+ #brazil::after {
+ content: "";
+ width: 40px;
+ height: 40px;
+ background: #002776;
+ border-radius: 50%;
+ position: absolute;
+ }
+
+ #canada {
+ background: white;
+ position: relative;
+ }
+
+ #canada::before,
+ #canada::after {
+ content: "";
+ position: absolute;
+ top: 0;
+ width: 25%;
+ height: 100%;
+ background: #D52B1E;
+ }
+
+ #canada::before {
+ left: 0;
+ }
+
+ #canada::after {
+ right: 0;
+ }
+
+ #canada .leaf {
+ position: absolute;
+ width: 55px;
+ height: 60px;
+ background: #D52B1E;
+ left: 50%;
+ top: 50%;
+ transform: translate(-50%, -50%);
+ clip-path: polygon(50% 0%, 60% 15%, 75% 10%, 65% 30%,
+ 85% 30%, 65% 45%, 80% 65%, 55% 55%,
+ 50% 85%, 45% 55%, 20% 65%, 35% 45%,
+ 15% 30%, 35% 30%, 25% 10%, 40% 15%);
+ }
+
+ #switzerland {
+ background: #D52B1E;
+ position: relative;
+ }
+
+ #switzerland::before {
+ content: "";
+ position: absolute;
+ width: 18%;
+ height: 60%;
+ background: white;
+ left: 41%;
+ top: 20%;
+ }
+
+ #switzerland::after {
+ content: "";
+ position: absolute;
+ width: 60%;
+ height: 18%;
+ background: white;
+ left: 20%;
+ top: 41%;
+ }
+
+
+ #vietnam {
+ background: #DE2910;
+ position: relative;
+ }
+
+ #vietnam::before {
+ content: "★";
+ position: absolute;
+ color: #FFDE00;
+ font-size: 50px;
+ left: 50%;
+ top: 50%;
+ transform: translate(-50%, -50%);
+ }
+
+
+ #sweden {
+ background: #006AA7;
+ position: relative;
+ }
+
+ #sweden::before {
+ content: "";
+ position: absolute;
+ background: #FECC00;
+ width: 16%;
+ height: 100%;
+ left: 32%;
+ }
+
+ #sweden::after {
+ content: "";
+ position: absolute;
+ background: #FECC00;
+ width: 100%;
+ height: 16%;
+ top: 42%;
+ }
+
+ #denmark {
+ background: #C60C30;
+ position: relative;
+ }
+
+ #denmark::before {
+ content: "";
+ position: absolute;
+ background: white;
+ width: 14%;
+ height: 100%;
+ left: 32%;
+ }
+
+ #denmark::after {
+ content: "";
+ position: absolute;
+ background: white;
+ width: 100%;
+ height: 14%;
+ top: 43%;
+ }
+
+ #finland {
+ background: white;
+ position: relative;
+ }
+
+ #finland::before {
+ content: "";
+ position: absolute;
+ background: #003580;
+ width: 16%;
+ height: 100%;
+ left: 32%;
+ }
+
+ #finland::after {
+ content: "";
+ position: absolute;
+ background: #003580;
+ width: 100%;
+ height: 16%;
+ top: 42%;
+ }
+
+ #iceland {
+ background: #003897;
+ position: relative;
+ }
+
+ #iceland::before {
+ content: "";
+ position: absolute;
+ background: white;
+ width: 24%;
+ height: 100%;
+ left: 28%;
+ z-index: 1;
+ }
+
+ #iceland::after {
+ content: "";
+ position: absolute;
+ background: white;
+ width: 100%;
+ height: 24%;
+ top: 38%;
+ z-index: 1;
+ }
+
+ #iceland .red-vertical,
+ #iceland .red-horizontal {
+ position: absolute;
+ background: #D72828;
+ z-index: 2;
+ }
+
+ #iceland .red-vertical {
+ width: 12%;
+ height: 100%;
+ left: 34%;
+ }
+
+ #iceland .red-horizontal {
+ width: 100%;
+ height: 12%;
+ top: 44%;
+ }
+
+ #norway {
+ background: #BA0C2F;
+ position: relative;
+ }
+
+ #norway::before {
+ content: "";
+ position: absolute;
+ background: white;
+ width: 22%;
+ height: 100%;
+ left: 28%;
+ z-index: 1;
+ }
+
+ #norway::after {
+ content: "";
+ position: absolute;
+ background: white;
+ width: 100%;
+ height: 22%;
+ top: 39%;
+ z-index: 1;
+ }
+
+ #norway .blue-vertical,
+ #norway .blue-horizontal {
+ position: absolute;
+ background: #00205B;
+ z-index: 2;
+ }
+
+ #norway .blue-vertical {
+ width: 12%;
+ height: 100%;
+ left: 32%;
+ }
+
+ #norway .blue-horizontal {
+ width: 100%;
+ height: 12%;
+ top: 44%;
+ }
+
+ #usa {
+ flex-direction: column;
+ }
+
+ #usa .stripe:nth-child(odd) {
+ background: #B22234;
+ }
+
+ #usa .stripe:nth-child(even) {
+ background: white;
+ }
+
+ #usa .canton {
+ position: absolute;
+ width: 40%;
+ height: 55%;
+ background: #3C3B6E;
+ top: 0;
+ left: 0;
+ }
+ </style>
+</head>
+
+<body>
+
+ <h1>Flag Guesser</h1>
+
+ <div id="info">
+ <div id="target">Press Start</div>
+ <div id="score">Score: 0</div>
+ <div id="timer">Time: 30</div>
+
+ <br>
+
+ <button id="startBtn">Start</button>
+ <button id="stopBtn">Stop</button>
+ <button id="resetBtn">Reset</button>
+ </div>
+
+ <div id="flag-container">
+
+ <div class="flag vertical" id="france">
+ <div class="blue"></div>
+ <div class="white"></div>
+ <div class="red"></div>
+ </div>
+ <div class="flag vertical" id="ireland">
+ <div class="green"></div>
+ <div class="white"></div>
+ <div class="orange"></div>
+ </div>
+ <div class="flag horizontal" id="germany">
+ <div class="black"></div>
+ <div class="red"></div>
+ <div class="yellow"></div>
+ </div>
+ <div class="flag horizontal" id="spain">
+ <div class="red"></div>
+ <div class="yellow"></div>
+ <div class="red"></div>
+ </div>
+ <div class="flag horizontal" id="russia">
+ <div class="white"></div>
+ <div class="blue"></div>
+ <div class="red"></div>
+ </div>
+ <div class="flag horizontal" id="india">
+ <div class="orange"></div>
+ <div class="white"></div>
+ <div class="green"></div>
+ </div>
+
+ <div class="flag" id="japan"></div>
+ <div class="flag" id="brazil"></div>
+ <div class="flag vertical" id="canada">
+ <div class="leaf"></div>
+ </div>
+
+ <div class="flag" id="sweden"></div>
+ <div class="flag" id="denmark"></div>
+ <div class="flag" id="finland"></div>
+ <div class="flag" id="iceland">
+ <div class="red-vertical"></div>
+ <div class="red-horizontal"></div>
+ </div>
+ <div class="flag" id="norway">
+ <div class="blue-vertical"></div>
+ <div class="blue-horizontal"></div>
+ </div>
+
+ <div class="flag" id="switzerland"></div>
+ <div class="flag" id="vietnam"></div>
+
+ <div class="flag horizontal" id="usa">
+ <div class="canton"></div>
+ <div class="stripe"></div>
+ <div class="stripe"></div>
+ <div class="stripe"></div>
+ <div class="stripe"></div>
+ <div class="stripe"></div>
+ <div class="stripe"></div>
+ <div class="stripe"></div>
+ <div class="stripe"></div>
+ <div class="stripe"></div>
+ <div class="stripe"></div>
+ <div class="stripe"></div>
+ <div class="stripe"></div>
+ <div class="stripe"></div>
+ </div>
+ <div class="flag horizontal" id="luxembourg">
+ <div class="red"></div>
+ <div class="white"></div>
+ <div class="lightblue"></div>
+ </div>
+ <div class="flag vertical" id="ivorycoast">
+ <div class="orange"></div>
+ <div class="white"></div>
+ <div class="green"></div>
+ </div>
+ <div class="flag horizontal" id="neatherlands">
+ <div class="darkred"></div>
+ <div class="white"></div>
+ <div class="blue"></div>
+ </div>
+ <div class="flag horizontal" id="hungary">
+ <div class="hred"></div>
+ <div class="white"></div>
+ <div class="hgreen"></div>
+ </div>
+ </div>
+ <script>
+
+ let score = 0;
+ let timeLeft = 30;
+ let currentAnswer = "";
+ let gameRunning = false;
+ let timer;
+
+ const flagElements = Array.from(document.querySelectorAll(".flag"));
+ const flags = flagElements.map(f => f.id);
+
+ function newRound() {
+ currentAnswer = flags[Math.floor(Math.random() * flags.length)];
+ document.getElementById("target").textContent =
+ "Find: " + currentAnswer.toUpperCase();
+ }
+
+ function updateScore(change) {
+ score += change;
+ document.getElementById("score").textContent = "Score: " + score;
+ }
+
+ function startGame() {
+ if (gameRunning) return;
+ gameRunning = true;
+ score = 0;
+ timeLeft = 30;
+ document.getElementById("score").textContent = "Score: 0";
+ document.getElementById("timer").textContent = "Time: 30";
+ newRound();
+
+ timer = setInterval(() => {
+ timeLeft--;
+ document.getElementById("timer").textContent = "Time: " + timeLeft;
+
+ if (timeLeft <= 0) {
+ gameRunning = false;
+ clearInterval(timer);
+ alert("Game Over! Score: " + score);
+ }
+ }, 1000);
+ }
+
+ function stopGame() {
+ gameRunning = false;
+ clearInterval(timer);
+ }
+
+ function resetGame() {
+ gameRunning = false;
+ clearInterval(timer);
+ score = 0;
+ timeLeft = 30;
+ document.getElementById("score").textContent = "Score: 0";
+ document.getElementById("timer").textContent = "Time: 30";
+ document.getElementById("target").textContent = "Press Start";
+ }
+
+ document.getElementById("startBtn").onclick = startGame;
+ document.getElementById("stopBtn").onclick = stopGame;
+ document.getElementById("resetBtn").onclick = resetGame;
+
+ flagElements.forEach(flag => {
+ flag.addEventListener("click", () => {
+ if (!gameRunning) return;
+ updateScore(flag.id === currentAnswer ? 1 : -1);
+ newRound();
+ });
+ });
+
+ newRound();
+
+ </script>
+
+</body>
+
+</html

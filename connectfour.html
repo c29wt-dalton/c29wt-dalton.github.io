@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Connect 4</title>
+
+<style>
+body {
+    margin: 0;
+    background: #12121c;
+    font-family: Arial, sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+h1 { margin-bottom: 10px; }
+
+#status {
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(7, 60px);
+    grid-template-rows: repeat(6, 60px);
+    gap: 8px;
+    background: #1e90ff;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.cell {
+    width: 60px;
+    height: 60px;
+    background: #12121c;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.player { background: #ff4757; }
+.ai { background: #eccc68; }
+
+button {
+    margin-top: 15px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background: #3742fa;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+button:hover { background: #5352ed; }
+</style>
+</head>
+
+<body>
+
+<h1>Connect 4</h1>
+<div id="status">Your Turn</div>
+<div id="board" class="board"></div>
+<button onclick="resetGame()">Restart</button>
+
+<script>
+const ROWS = 6;
+const COLS = 7;
+const EMPTY = 0;
+const PLAYER = 1;
+const AI = 2;
+
+let board = [];
+let gameOver = false;
+
+const boardEl = document.getElementById("board");
+const statusEl = document.getElementById("status");
+
+function initBoard() {
+    board = Array.from({ length: ROWS }, () => Array(COLS).fill(EMPTY));
+}
+
+function renderBoard() {
+    boardEl.innerHTML = "";
+    for (let r = ROWS - 1; r >= 0; r--) {
+        for (let c = 0; c < COLS; c++) {
+            const cell = document.createElement("div");
+            cell.classList.add("cell");
+            if (board[r][c] === PLAYER) cell.classList.add("player");
+            if (board[r][c] === AI) cell.classList.add("ai");
+            cell.onclick = () => playerMove(c);
+            boardEl.appendChild(cell);
+        }
+    }
+}
+
+function getOpenRow(col) {
+    for (let r = 0; r < ROWS; r++) {
+        if (board[r][col] === EMPTY) return r;
+    }
+    return -1;
+}
+
+function checkWin(piece) {
+
+    // Horizontal
+    for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS - 3; c++) {
+            if (
+                board[r][c] === piece &&
+                board[r][c+1] === piece &&
+                board[r][c+2] === piece &&
+                board[r][c+3] === piece
+            ) return true;
+        }
+    }
+
+    // Vertical
+    for (let c = 0; c < COLS; c++) {
+        for (let r = 0; r < ROWS - 3; r++) {
+            if (
+                board[r][c] === piece &&
+                board[r+1][c] === piece &&
+                board[r+2][c] === piece &&
+                board[r+3][c] === piece
+            ) return true;
+        }
+    }
+
+    // Diagonal (bottom-left → top-right)
+    for (let r = 0; r < ROWS - 3; r++) {
+        for (let c = 0; c < COLS - 3; c++) {
+            if (
+                board[r][c] === piece &&
+                board[r+1][c+1] === piece &&
+                board[r+2][c+2] === piece &&
+                board[r+3][c+3] === piece
+            ) return true;
+        }
+    }
+
+    // Diagonal (top-left → bottom-right)
+    for (let r = 3; r < ROWS; r++) {
+        for (let c = 0; c < COLS - 3; c++) {
+            if (
+                board[r][c] === piece &&
+                board[r-1][c+1] === piece &&
+                board[r-2][c+2] === piece &&
+                board[r-3][c+3] === piece
+            ) return true;
+        }
+    }
+
+    return false;
+}
+
+function playerMove(col) {
+    if (gameOver) return;
+
+    let row = getOpenRow(col);
+    if (row === -1) return;
+
+    board[row][col] = PLAYER;
+    renderBoard();
+
+    if (checkWin(PLAYER)) {
+        statusEl.textContent = "🎉 You Win!";
+        gameOver = true;
+        return;
+    }
+
+    statusEl.textContent = "Bot's Turn...";
+    setTimeout(aiMove, 400);
+}
+
+function aiMove() {
+    if (gameOver) return;
+
+    let validCols = [];
+    for (let c = 0; c < COLS; c++) {
+        if (getOpenRow(c) !== -1) validCols.push(c);
+    }
+
+    if (validCols.length === 0) return;
+
+    let col = validCols[Math.floor(Math.random() * validCols.length)];
+    let row = getOpenRow(col);
+    board[row][col] = AI;
+
+    renderBoard();
+
+    if (checkWin(AI)) {
+        statusEl.textContent = "💀 Bot Wins!";
+        gameOver = true;
+        return;
+    }
+
+    statusEl.textContent = "Your Turn";
+}
+
+function resetGame() {
+    gameOver = false;
+    statusEl.textContent = "Your Turn";
+    initBoard();
+    renderBoard();
+}
+
+initBoard();
+renderBoard();
+</script>
+
+</body>
+</html>
